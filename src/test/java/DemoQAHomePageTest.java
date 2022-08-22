@@ -1,47 +1,64 @@
+import Pages.HomePage;
 import Utils.DriverUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.annotations.Test;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class DemoQAHomePageTest {
     static WebDriver driver;
+    HomePage homePage;
 
     @BeforeClass
     void setup(){
         DriverUtils.setChromePath();
         driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
+        driver.manage().window().maximize();
+        homePage = new HomePage();
+        driver.get(homePage.baseUrl);
     }
 
-    @Test (priority = 1)
-    void testTitle(){
+
+
+    @Test (priority = 2)
+    void testTitle() throws InterruptedException {
         Assert.assertEquals(driver.getTitle(), "ToolsQA");
     }
 
-    @Test (priority = 2)
-    void varifyBannerIsVisible(){
-        WebElement el = driver.findElement(By.cssSelector("img.banner-image"));
-        Assert.assertTrue(el.isDisplayed());
-    }
-
     @Test (priority = 3)
-    void verifyIfTheLogoIsVisible(){
-        WebElement el = driver.findElement(By.cssSelector("header img"));
-        el.getText();
+    void varifyBannerIsVisible(){
+        WebElement el = driver.findElement( homePage.banner );
         Assert.assertTrue(el.isDisplayed());
     }
 
     @Test (priority = 4)
+    void verifyIfTheLogoIsVisible(){
+        WebElement el = driver.findElement( homePage.logo );
+        el.getText();
+        Assert.assertTrue(el.isDisplayed());
+    }
+
+    @Test (priority = 5)
     void validateFooter(){
-        WebElement el = driver.findElement(By.cssSelector("footer span"));
-        String footerText = el.getText();
-        System.out.println(footerText);
-        Assert.assertTrue( footerText.contains("ALL RIGHTS RESERVED.") );
+        WebElement el = driver.findElement( homePage.footerText );
+        String f = el.getText();
+        System.out.println( f.contains("ALL RIGHTS RESERVED") );
+        Assert.assertTrue( f.contains("ALL RIGHTS RESERVED"));
+    }
+
+    @Test(priority = 1)
+    void validateAllMenuPresent() throws IOException, InterruptedException {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        for(String menuName : homePage.menuItems.keySet()){
+            DriverUtils.scrollToElementAndClick(driver, homePage.menuItems.get(menuName));
+            Assert.assertEquals(driver.findElement(homePage.mainHeader).getText(), menuName);
+            driver.navigate().back();
+        }
     }
 
     @AfterClass

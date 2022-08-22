@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation Test on DemoQA">
+    <test name="Regression Suit #1">
+        <parameter name="emailid" value="tester456@gmail.com"/>
+        <parameter name="password" value="test@123"/>
+        <classes>
+            <class name="CheckboxPage"/>
+            <class name="DemoQAHomePageTest"/>
+            <class name="Misc_Exercise.BrokenLinksImagesTest"/>
+            <class name="Misc_Exercise.DynamicWaitExample"/>
+            <class name="Misc_Exercise.DynamicPropertiesTest"/>
+        </classes>
+    </test>
+</suite>
