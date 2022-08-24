@@ -16,8 +16,7 @@ public class CheckboxPage {
 
     @BeforeClass
     void setup() throws IOException {
-        DriverUtils.setChromePath();
-        driver = new ChromeDriver();
+        driver = DriverUtils.getWebDriver();
         driver.manage().window().maximize();
         elementsPage = new ElementsPage();
         driver.get(elementsPage.pageUrl);

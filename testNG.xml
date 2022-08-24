@@ -1,5 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Test on DemoQA">
+    <listeners>
+        <listener class-name="Utils.ReportGen"></listener>
+    </listeners>
     <test name="Regression Suit #1">
         <parameter name="emailid" value="tester456@gmail.com"/>
         <parameter name="password" value="test@123"/>

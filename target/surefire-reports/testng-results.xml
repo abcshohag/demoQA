@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-08-22T09:49:36 CDT" name="Command line suite" finished-at="2022-08-22T09:50:01 CDT" duration-ms="25936">
+    <groups>
+    </groups>
+    <test started-at="2022-08-22T09:49:36 CDT" name="Command line test" finished-at="2022-08-22T09:50:01 CDT" duration-ms="25936">
+      <class name="Misc_Exercise.BrokenLinksImagesTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:Misc_Exercise.BrokenLinksImagesTest@588df31b]" started-at="2022-08-22T09:49:36 CDT" name="setup" finished-at="2022-08-22T09:49:42 CDT" duration-ms="6158" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="brokenImageTest()[pri:0, instance:Misc_Exercise.BrokenLinksImagesTest@588df31b]" started-at="2022-08-22T09:49:42 CDT" name="brokenImageTest" finished-at="2022-08-22T09:49:42 CDT" duration-ms="74" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- brokenImageTest -->
+      </class> <!-- Misc_Exercise.BrokenLinksImagesTest -->
+      <class name="Misc_Exercise.DynamicPropertiesTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:Misc_Exercise.DynamicPropertiesTest@1efee8e7]" started-at="2022-08-22T09:49:42 CDT" name="setup" finished-at="2022-08-22T09:49:47 CDT" duration-ms="5116" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testElementWaitForClickable()[pri:0, instance:Misc_Exercise.DynamicPropertiesTest@1efee8e7]" started-at="2022-08-22T09:49:47 CDT" name="testElementWaitForClickable" finished-at="2022-08-22T09:49:52 CDT" duration-ms="5388" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testElementWaitForClickable -->
+      </class> <!-- Misc_Exercise.DynamicPropertiesTest -->
+      <class name="DemoQAHomePageTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:49:52 CDT" name="setup" finished-at="2022-08-22T09:50:01 CDT" duration-ms="8625" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="validateAllMenuPresent()[pri:1, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="validateAllMenuPresent" finished-at="2022-08-22T09:50:01 CDT" duration-ms="387" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateAllMenuPresent -->
+        <test-method signature="testTitle()[pri:2, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="testTitle" finished-at="2022-08-22T09:50:01 CDT" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTitle -->
+        <test-method signature="varifyBannerIsVisible()[pri:3, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="varifyBannerIsVisible" finished-at="2022-08-22T09:50:01 CDT" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- varifyBannerIsVisible -->
+        <test-method signature="verifyIfTheLogoIsVisible()[pri:4, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="verifyIfTheLogoIsVisible" finished-at="2022-08-22T09:50:01 CDT" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyIfTheLogoIsVisible -->
+        <test-method signature="validateFooter()[pri:5, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="validateFooter" finished-at="2022-08-22T09:50:01 CDT" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateFooter -->
+        <test-method is-config="true" signature="wrapUp()[pri:0, instance:DemoQAHomePageTest@1ee807c6]" started-at="2022-08-22T09:50:01 CDT" name="wrapUp" finished-at="2022-08-22T09:50:01 CDT" duration-ms="110" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- wrapUp -->
+      </class> <!-- DemoQAHomePageTest -->
+    </test> <!-- Command line test -->
+  </suite> <!-- Command line suite -->
+</testng-results>

@@ -16,8 +16,7 @@ public class DemoQAHomePageTest {
 
     @BeforeClass
     void setup(){
-        DriverUtils.setChromePath();
-        driver = new ChromeDriver();
+        driver = DriverUtils.getWebDriver();
         driver.manage().window().maximize();
         homePage = new HomePage();
         driver.get(homePage.baseUrl);
