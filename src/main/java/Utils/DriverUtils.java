@@ -5,6 +5,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -101,15 +103,17 @@ public class DriverUtils {
         return prop;
     }
 
+    public static void clickUsingJS(WebDriver driver, WebElement element){
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
     public static WebDriver getWebDriver(){
         if(prop == null)
             initializeProperties();
         String browser = prop.getProperty("browser");
-        System.out.println("Browser type: " + browser);
         WebDriver driver;
         if(browser == null || browser.equalsIgnoreCase("Chrome")){
-            System.out.println("Setting chorme browser");
-//            System.setProperty("webdriver.chrome.driver", prop.getProperty("chromeDriverPath"));
             driver = WebDriverManager.chromedriver().create();
         } else if (browser.equalsIgnoreCase("headless")) {
             System.out.println("Setting headless browser");
@@ -118,21 +122,49 @@ public class DriverUtils {
             chromeOptions.addArguments("--disable-gpu");
             chromeOptions.addArguments("--window-size=1280,800");
             chromeOptions.addArguments("--allow-insecure-localhost");
-//            System.setProperty("webdriver.chrome.driver", prop.getProperty("chromeDriverPath"));
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(chromeOptions);
         }else if (browser.equalsIgnoreCase("safari")) {
-            System.out.println("Setting safari browser");
-            driver = new SafariDriver();
+            driver = WebDriverManager.safaridriver().create();
         }else if (browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("mozilla")) {
-            System.out.println("Setting Firefox browser");
-//            System.setProperty("webdriver.gecko.driver", prop.getProperty("geckoDriverPath"));
             driver = WebDriverManager.firefoxdriver().create();
         }else{
-            System.out.println("Setting default browser (browser)");
-//            System.setProperty("webdriver.chrome.driver", prop.getProperty("chromeDriverPath"));
             driver = WebDriverManager.chromedriver().create();
         }
         return driver;
+    }
+
+    public static void waitAndClick(WebDriver driver, By elementSelector, int ms){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(ms));
+        wait.until(ExpectedConditions.elementToBeClickable(elementSelector));
+        DriverUtils.scrollToElementAndClick (driver, elementSelector);
+    }
+
+    public static void scrollAndClick(WebDriver driver, String cssSelector){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(cssSelector)));
+        driver.findElement(By.cssSelector(cssSelector)).click();
+    }
+
+    //Use this method to click element that are almost impossible to click
+    public static void scrollWaitAndClickUsingJs(WebDriver driver, By elementSelector, int ms){
+        //1. Scroll using JS
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(elementSelector));
+
+        //2.Wait for the element to be clickable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(ms));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementSelector));
+
+        String currentZoom = (String) ((JavascriptExecutor)driver).executeScript("return document.body.style.zoom;");
+
+        //3. Zoom out to 50%
+        DriverUtils.zoomOutToPercentage(driver, .50);
+
+        //4. click using JS
+        DriverUtils.clickUsingJS(driver, element);
+
+        //5. Set old Zoom percentage
+        if(currentZoom.length() > 0){
+            ((JavascriptExecutor)driver).executeScript("document.body.style.zoom=" + currentZoom);
+        }
     }
 }

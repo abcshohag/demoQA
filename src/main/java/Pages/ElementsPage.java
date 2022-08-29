@@ -13,5 +13,5 @@ public class ElementsPage extends BasePage{
     public By brokenLinksImages_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(7)");
     public By uploadAndDownload_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(8)");
     public By dynamicProperties_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(9)");
-    public String pageUrl = "https://demoqa.com/elements";
+    public static String pageUrl = "https://demoqa.com/elements";
 }

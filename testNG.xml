@@ -12,6 +12,7 @@
             <class name="Misc_Exercise.BrokenLinksImagesTest"/>
             <class name="Misc_Exercise.DynamicWaitExample"/>
             <class name="Misc_Exercise.DynamicPropertiesTest"/>
+            <class name="SelectableGridPageTest"/>
         </classes>
     </test>
 </suite>
