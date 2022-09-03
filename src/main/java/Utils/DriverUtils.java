@@ -16,8 +16,11 @@ import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.Response;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,6 +92,11 @@ public class DriverUtils {
         d.manage().timeouts().pageLoadTimeout(Duration.ofMillis(ms));
     }
 
+    public static Boolean isFileExist(String absoluteFilePath){
+        File tempFile = new File(absoluteFilePath);
+        return tempFile.exists();
+    }
+
     public static Properties initializeProperties(){
         if(prop != null)
             return prop;
@@ -146,7 +154,7 @@ public class DriverUtils {
     }
 
     //Use this method to click element that are almost impossible to click
-    public static void scrollWaitAndClickUsingJs(WebDriver driver, By elementSelector, int ms){
+    public static void scrollWaitAndClickUsingJs(WebDriver driver, By elementSelector, int ms) {
         //1. Scroll using JS
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(elementSelector));
 
@@ -161,7 +169,6 @@ public class DriverUtils {
 
         //4. click using JS
         DriverUtils.clickUsingJS(driver, element);
-
         //5. Set old Zoom percentage
         if(currentZoom.length() > 0){
             ((JavascriptExecutor)driver).executeScript("document.body.style.zoom=" + currentZoom);

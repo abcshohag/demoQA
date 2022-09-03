@@ -1,9 +1,10 @@
 package Pages;
 
+import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Element_TextBox {
+public class Element_TextBox extends ElementsPage{
 
     By userName = new By.ByCssSelector("#userName");
     By userEmail = new By.ByCssSelector("#userEmail");
@@ -23,6 +24,6 @@ public class Element_TextBox {
         driver.findElement(userEmail).sendKeys(email);
         driver.findElement(currentAddress).sendKeys(currAdd);
         driver.findElement(permanantAddress).sendKeys(perAdd);
-        driver.findElement(submitButton).click();
+        DriverUtils.scrollWaitAndClickUsingJs(driver, submitButton, 5000);
     }
 }

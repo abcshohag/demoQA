@@ -27,12 +27,11 @@ public class TextBoxTest {
         String email = f.name().username() + "@gmail.com";
         String currAddress = f.address().fullAddress();
 
-//        textBox.populateFormAndClick(driver, name, email, currAddress, currAddress);
-
+        textBox.populateFormAndClick(driver, name, email, currAddress, currAddress);
         DriverUtils.scrollWaitAndClickUsingJs(driver, submitButton, 5000);
-
         Assert.assertTrue(driver.findElement(textBox.output).getText().contains(name));
 
+        driver.findElement(textBox.checkbox_submenu).click();
 
     }
 

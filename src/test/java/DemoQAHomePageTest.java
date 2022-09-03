@@ -19,13 +19,11 @@ public class DemoQAHomePageTest {
         driver = DriverUtils.getWebDriver();
         driver.manage().window().maximize();
         homePage = new HomePage();
-        driver.get(homePage.baseUrl);
+//        driver.get(homePage.baseUrl);
     }
 
-
-
     @Test (priority = 2)
-    void testTitle() throws InterruptedException {
+    void testTitle(){
         Assert.assertEquals(driver.getTitle(), "ToolsQA");
     }
 
