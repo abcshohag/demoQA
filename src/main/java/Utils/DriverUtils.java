@@ -16,9 +16,7 @@ import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.Response;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -98,8 +96,10 @@ public class DriverUtils {
     }
 
     public static Properties initializeProperties(){
-        if(prop != null)
+        if(prop != null) {
+            System.out.println("prop is not null");
             return prop;
+        }
         prop = new Properties();
         try {
             FileInputStream ip = new FileInputStream("demoqa.properties");
@@ -109,6 +109,10 @@ public class DriverUtils {
             Reporter.log("Failed to load properties file. Error: " +  e.getMessage());
         }
         return prop;
+    }
+
+    public static void storeProperties(Properties property) throws IOException {
+        property.store(new FileOutputStream("demoqa.properties"), null);
     }
 
     public static void clickUsingJS(WebDriver driver, WebElement element){
