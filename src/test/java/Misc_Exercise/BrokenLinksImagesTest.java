@@ -44,7 +44,11 @@ public class BrokenLinksImagesTest {
             Assert.fail("Broken image isn't broken");
         }
 
+        System.out.println(driver.toString());
+
         driver.quit();
+
+        System.out.println(driver.toString());
 
     }
 }

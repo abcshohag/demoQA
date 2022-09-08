@@ -1,11 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Test on DemoQA">
     <listeners>
-        <listener class-name="Utils.ReportGen"></listener>
+        <listener class-name="Listeners.ExtentTestNGIReporterListener" />
     </listeners>
     <test name="Regression Suit #1">
-        <parameter name="emailid" value="tester456@gmail.com"/>
-        <parameter name="password" value="test@123"/>
         <classes>
             <class name="CheckboxPage"/>
             <class name="DemoQAHomePageTest"/>
@@ -13,6 +11,13 @@
             <class name="Misc_Exercise.DynamicWaitExample"/>
             <class name="Misc_Exercise.DynamicPropertiesTest"/>
             <class name="SelectableGridPageTest"/>
+            <class name="FileDownloadTest_1"/>
+            <class name="FileUploadTest"/>
+            <class name="JsAlertTest"/>
+            <class name="RadioButtonTest"/>
+            <class name="ReadExcelForTestClass"/>
+            <class name="TextBoxTest"/>
+            <class name="TextBoxTest_UsingExcel"/>
         </classes>
     </test>
 </suite>

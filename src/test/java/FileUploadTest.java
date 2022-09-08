@@ -1,3 +1,4 @@
+import Pages.BasePage;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class FileUploadTest {
+public class FileUploadTest extends BasePage {
     WebDriver driver;
 
     @BeforeClass
@@ -18,7 +19,7 @@ public class FileUploadTest {
     @Test
     void fileUploadTest() throws InterruptedException {
         WebElement fileUpload = driver.findElement(By.cssSelector("#file-upload"));
-        String absolutePath = DriverUtils.initializeProperties().getProperty("projectPath") + "resources/test_data/image.png";
+        String absolutePath = System.getProperty("user.dir") + "/resources/test_data/image.png";
         fileUpload.sendKeys(absolutePath);
         Thread.sleep(2000);
 

@@ -1,3 +1,4 @@
+import Pages.BasePage;
 import Pages.Element_TextBox;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
@@ -8,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class TextBoxTest {
+public class TextBoxTest extends BasePage {
     WebDriver driver;
 
     @BeforeClass
@@ -17,11 +18,15 @@ public class TextBoxTest {
     }
 
     @Test
-    void testForm(){
+    void testForm() throws Exception {
         Element_TextBox textBox = new Element_TextBox();
         By submitButton = new By.ByCssSelector("#submit");
 
-
+        driver.get(textBox.pageUrl);
+        robotZoomOut();
+        robotZoomOut();
+        robotZoomOut();
+        robotZoomOut();
         Faker f = new Faker();
         String name = f.name().name();
         String email = f.name().username() + "@gmail.com";
@@ -30,9 +35,6 @@ public class TextBoxTest {
         textBox.populateFormAndClick(driver, name, email, currAddress, currAddress);
         DriverUtils.scrollWaitAndClickUsingJs(driver, submitButton, 5000);
         Assert.assertTrue(driver.findElement(textBox.output).getText().contains(name));
-
-        driver.findElement(textBox.checkbox_submenu).click();
-
     }
 
 }

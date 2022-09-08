@@ -38,7 +38,6 @@ public class PracticePracticeForm {
     @Test
     void populateForm() throws InterruptedException {
         Faker faker = new Faker(new Locale("us-US"));
-
         driver.findElement(By.cssSelector("#firstName")).sendKeys(faker.name().firstName());
         driver.findElement(By.cssSelector("#lastName")).sendKeys(faker.name().lastName());
         driver.findElement(By.cssSelector("#userEmail")).sendKeys(faker.name().username()+"@gmail.com");

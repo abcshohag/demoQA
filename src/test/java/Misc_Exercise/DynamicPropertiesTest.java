@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Pages.BasePage;
 import Pages.ElementsPage;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.time.Duration;
 
-public class DynamicPropertiesTest {
+public class DynamicPropertiesTest extends BasePage {
     static WebDriver driver;
     static ElementsPage elementsPage;
 
@@ -37,12 +38,9 @@ public class DynamicPropertiesTest {
         Assert.assertTrue(driver.findElement(By.cssSelector("#enableAfter")).isEnabled());
         System.out.println("Button is enabled: " + driver.findElement(By.cssSelector("#enableAfter")).isEnabled());
 
-        //
-        // I clicked on the button that's going to make me wait for any duration less than 10 second.
 
-        //Instanciate WebDriverWait object
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(new By.ByCssSelector());
+//      Instanciate WebDriverWait object
+//      wait.until(ExpectedConditions.visibilityOfElementLocated(new By.ByCssSelector());
         WebElement helloWorld = driver.findElement(By.cssSelector("div#start"));
         Assert.assertTrue(helloWorld.getText().contains("Hello World"));
     }

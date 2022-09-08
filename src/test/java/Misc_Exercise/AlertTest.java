@@ -1,13 +1,17 @@
 package Misc_Exercise;
 
+import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlertTest {
     public static void main(String[] args) throws InterruptedException {
@@ -28,6 +32,5 @@ public class AlertTest {
         driver.switchTo().alert().accept();
 
         Assert.assertTrue(driver.findElement(By.cssSelector("#promptResult")).getText().contains("Hi There"));
-
     }
 }

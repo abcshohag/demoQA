@@ -1,44 +1,40 @@
 import Pages.Element_TextBox;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
-import org.apache.poi.ss.usermodel.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import org.testng.annotations.*;
 
-public class TextBoxTest_UsingExcel {
-    static final String EXCEL_FILE_PATH = System.getProperty("user.dir") + "/resources/test_data/TestDataForTextBox.xls";
+public class TextBoxTest_UsingExcel extends BaseMethod {
     WebDriver driver;
     Element_TextBox textBox;
+    static final String EXCEL_FILE_PATH = System.getProperty("user.dir") + "/resources/test_data/TestDataForTextBox.xlsx";
 
-    @BeforeClass
-    void setup(){
+
+    @BeforeMethod
+    void setup() throws Exception {
         driver = DriverUtils.getWebDriver();
         textBox = new Element_TextBox();
-        driver.get("https://demoqa.com/text-box");
+        driver.get(textBox.pageUrl);
+        driver.manage().window().maximize();
     }
 
-    @Test
-    void testForm() throws IOException {
-        Workbook workbook = WorkbookFactory.create(new FileInputStream(EXCEL_FILE_PATH));
-        Sheet sheet = workbook.getSheetAt(0);
-        Row record1 = sheet.getRow(1);
 
-        String name = record1.getCell(0).toString();
-        String email = record1.getCell(1).toString();
-        String currAddress = record1.getCell(2).toString();
-        String permAddress = record1.getCell(3).toString();
-        textBox.populateFormAndClick(driver, name, email, currAddress, permAddress);
-        Assert.assertTrue(driver.findElement(textBox.output).getText().contains(name));
+    @DataProvider(name = "loadFormData")
+    public static Object[][] dataLoad() throws Exception {
+        return utils.ExcelUtils.getTableArray(EXCEL_FILE_PATH);
     }
 
-    @AfterClass
-    void wrapUp(){
-        driver.quit();
+    @Test(dataProvider = "loadFormData")
+    void testForm(String str1, String str2, String str3, String str4) throws Exception {
+        driver.findElement(textBox.userName).sendKeys(str1);
+        driver.findElement(textBox.userEmail).sendKeys(str2);
+        driver.findElement(textBox.currentAddress).sendKeys(str3);
+        driver.findElement(textBox.permanantAddress).sendKeys(str4);
+        robotZoomOut();
+        robotZoomOut();
+        DriverUtils.scrollWaitAndClickUsingJs(driver, textBox.submitButton, 5000);
+        Assert.assertTrue( driver.findElement(textBox.output).getText().contains(str1));
+        driver.navigate().refresh();
     }
 }

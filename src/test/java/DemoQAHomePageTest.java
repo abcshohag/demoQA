@@ -19,7 +19,7 @@ public class DemoQAHomePageTest {
         driver = DriverUtils.getWebDriver();
         driver.manage().window().maximize();
         homePage = new HomePage();
-//        driver.get(homePage.baseUrl);
+        driver.get(homePage.pageUrl);
     }
 
     @Test (priority = 2)

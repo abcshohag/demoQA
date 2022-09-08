@@ -1,5 +1,6 @@
 import Pages.Element_RadioButtonPage;
 import Pages.ElementsPage;
+import Utils.DriverUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ public class RadioButtonTest {
 
     @BeforeClass
     void getReady(){
-        driver = WebDriverManager.chromiumdriver().create();
+        driver = DriverUtils.getWebDriver();
         elementsPage = new ElementsPage();
         rb = new Element_RadioButtonPage();
         driver.get(ElementsPage.pageUrl);

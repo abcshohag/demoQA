@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class SelectableGridPageTest {
     static WebDriver driver;
@@ -18,7 +19,7 @@ public class SelectableGridPageTest {
         driver.get("https://demoqa.com/");
 
         //Scrolling down to Interaction and menu and clicking
-        DriverUtils.scrollAndClick(driver, "//.top-card:nth-child(5) .card-body//");
+        DriverUtils.scrollAndClick(driver, ".top-card:nth-child(5) .card-body");
         DriverUtils.scrollAndClick(driver, ".element-group:nth-child(5) #item-1");
         //clciking on the grid tab
         driver.findElement(By.cssSelector("#demo-tab-grid")).click();
@@ -39,20 +40,24 @@ public class SelectableGridPageTest {
         testABox("#row3 li:nth-child(3)");
     }
 
+    @Test
+    void anotherTest(){
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(false);
+    }
+
     void testABox(String selector) throws InterruptedException {
         //box ONE
         WebElement box =  driver.findElement(By.cssSelector(selector));
         box.click();
-        Thread.sleep(1000);
         Assert.assertTrue( box.getAttribute("class").contains("active") );
         box.click();
-        Thread.sleep(1000);
         Assert.assertFalse( box.getAttribute("class").contains("active") );
-        Thread.sleep(1000);
     }
 
     @AfterClass
     void wrapUp(){
+        System.out.println("calling after class");
         driver.quit();
     }
 }

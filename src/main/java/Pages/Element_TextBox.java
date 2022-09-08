@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 
 public class Element_TextBox extends ElementsPage{
 
-    By userName = new By.ByCssSelector("#userName");
-    By userEmail = new By.ByCssSelector("#userEmail");
-    By currentAddress = new By.ByCssSelector("#currentAddress");
-    By permanantAddress = new By.ByCssSelector("#permanentAddress");
+    public By userName = new By.ByCssSelector("#userName");
+    public By userEmail = new By.ByCssSelector("#userEmail");
+    public By currentAddress = new By.ByCssSelector("#currentAddress");
+    public By permanantAddress = new By.ByCssSelector("#permanentAddress");
 
     public By submitButton = new By.ByCssSelector("#submit");
 

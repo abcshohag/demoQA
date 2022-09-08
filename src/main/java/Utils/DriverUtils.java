@@ -2,8 +2,12 @@ package Utils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,7 +32,10 @@ public class DriverUtils {
     private DriverUtils(){}
     public static Properties prop;
 
-    public static WebDriver getChromeDriverIncognito(){
+    private static WebDriver driver;
+
+
+    public static WebDriver getChromeIncognito(){
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--incognito");
         DesiredCapabilities d = new DesiredCapabilities();
@@ -123,29 +130,49 @@ public class DriverUtils {
     public static WebDriver getWebDriver(){
         if(prop == null)
             initializeProperties();
+        if( driver != null && !driver.toString().contains("(null)") )
+            return driver;
         String browser = prop.getProperty("browser");
-        WebDriver driver;
-        if(browser == null || browser.equalsIgnoreCase("Chrome")){
-            driver = WebDriverManager.chromedriver().create();
-        } else if (browser.equalsIgnoreCase("headless")) {
-            System.out.println("Setting headless browser");
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--headless");
-            chromeOptions.addArguments("--disable-gpu");
-            chromeOptions.addArguments("--window-size=1280,800");
-            chromeOptions.addArguments("--allow-insecure-localhost");
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(chromeOptions);
-        }else if (browser.equalsIgnoreCase("safari")) {
-            driver = WebDriverManager.safaridriver().create();
-        }else if (browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("mozilla")) {
-            driver = WebDriverManager.firefoxdriver().create();
-        }else{
-            driver = WebDriverManager.chromedriver().create();
+        switch (browser.toLowerCase()){
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "chrome_headless":
+                var chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                chromeOptions.addArguments("--disable-gpu");
+                chromeOptions.addArguments("--window-size=1280,800");
+                chromeOptions.addArguments("--allow-insecure-localhost");
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(chromeOptions);
+                break;
+            case "safari":
+                driver = WebDriverManager.safaridriver().create();
+                break;
+            case "firefox":
+            case "mozilla":
+                driver = WebDriverManager.firefoxdriver().create();
+                break;
+            case "ie":
+            case "internet explorer":
+                WebDriverManager.iedriver().setup();
+                driver = new InternetExplorerDriver();
+                break;
+            case "edge":
+                driver = WebDriverManager.edgedriver().create();
+                break;
+            case "edge_headless":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--headless");
+                driver = new EdgeDriver(edgeOptions);
+                break;
+            default:
+                throw new NotFoundException("Browser Not Found. Please Provide a Valid Browser in the List");
         }
         return driver;
     }
-
     public static void waitAndClick(WebDriver driver, By elementSelector, int ms){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(ms));
         wait.until(ExpectedConditions.elementToBeClickable(elementSelector));
