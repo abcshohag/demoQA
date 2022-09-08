@@ -1,3 +1,4 @@
+import Utils.ExcelUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -7,7 +8,7 @@ public class ReadExcelForTestClass {
 
     @DataProvider(name = "loadFormData")
     public static Object[][] dataLoad() throws Exception {
-        return utils.ExcelUtils.getTableArray(EXCEL_FILE_PATH);
+        return ExcelUtils.getTableArray(EXCEL_FILE_PATH);
     }
 
     @Test(dataProvider = "loadFormData")

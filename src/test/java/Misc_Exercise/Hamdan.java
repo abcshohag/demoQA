@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.Locale;
 
-public class Hamdan {
+public class Hamdan extends BaseMethod {
     static WebDriver driver;
 
     @BeforeClass
@@ -21,7 +22,10 @@ public class Hamdan {
     }
 
     @Test(priority = 1)
-    void navigateToElementMenu() throws InterruptedException {
+    void navigateToElementMenu() throws Exception {
+        String title = getUrlTitle("https://demoqa.com");
+        robotZoomOut();
+        robotZoomOut();
         Thread.sleep(3000);
         driver.findElement(By.cssSelector("#app > div > div > div.home-body > div > div:nth-child(1)")).click();
     }

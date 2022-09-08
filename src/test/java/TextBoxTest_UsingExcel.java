@@ -1,6 +1,7 @@
 import Pages.Element_TextBox;
 import Utils.BaseMethod;
 import Utils.DriverUtils;
+import Utils.ExcelUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,17 +23,19 @@ public class TextBoxTest_UsingExcel extends BaseMethod {
 
     @DataProvider(name = "loadFormData")
     public static Object[][] dataLoad() throws Exception {
-        return utils.ExcelUtils.getTableArray(EXCEL_FILE_PATH);
+        return ExcelUtils.getTableArray(EXCEL_FILE_PATH);
     }
 
     @Test(dataProvider = "loadFormData")
     void testForm(String str1, String str2, String str3, String str4) throws Exception {
+
+        //populating form
         driver.findElement(textBox.userName).sendKeys(str1);
         driver.findElement(textBox.userEmail).sendKeys(str2);
+
         driver.findElement(textBox.currentAddress).sendKeys(str3);
         driver.findElement(textBox.permanantAddress).sendKeys(str4);
-        robotZoomOut();
-        robotZoomOut();
+
         DriverUtils.scrollWaitAndClickUsingJs(driver, textBox.submitButton, 5000);
         Assert.assertTrue( driver.findElement(textBox.output).getText().contains(str1));
         driver.navigate().refresh();

@@ -3,7 +3,9 @@ package Utils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
@@ -16,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class BaseMethod {
@@ -179,8 +182,8 @@ public class BaseMethod {
 
     /* To Accept the Alert Dialog Message */
     public void alertAccept() throws Exception {
-        al = getWebDriver().switchTo().alert();
-        al.accept();
+        WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent()).accept();
     }
 
 
