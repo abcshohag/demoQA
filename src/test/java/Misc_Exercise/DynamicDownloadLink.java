@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.util.List;
 
-public class DynamicDownloadLink {
+public class DynamicDownloadLink  extends BaseMethod {
     WebDriver driver;
 
     @BeforeClass
@@ -45,7 +46,7 @@ public class DynamicDownloadLink {
     }
 
     @AfterClass
-    void wraup(){
-        driver.quit();
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
 }

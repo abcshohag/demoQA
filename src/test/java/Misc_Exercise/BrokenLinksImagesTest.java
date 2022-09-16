@@ -21,7 +21,7 @@ public class BrokenLinksImagesTest {
         driver.manage().window().maximize();
         elementsPage = new ElementsPage();
         driver.get(elementsPage.pageUrl);
-        DriverUtils.scrollToElementAndClick(driver, elementsPage.brokenLinksImages_submenu);
+        DriverUtils.scrollToElementAndClick(elementsPage.brokenLinksImages_submenu);
     }
 
     @Test

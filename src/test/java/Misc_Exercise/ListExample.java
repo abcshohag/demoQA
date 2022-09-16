@@ -1,16 +1,18 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class ListExample {
+public class ListExample  extends BaseMethod {
     @Test
     void testMenu() throws InterruptedException {
         WebDriver driver = DriverUtils.getWebDriver();
@@ -29,7 +31,10 @@ public class ListExample {
         String actualText = driver.findElement(By.cssSelector(".main-header")).getText();
 
         Assert.assertEquals(actualText, expected);
+    }
 
-        driver.quit();
+    @AfterClass
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
 }

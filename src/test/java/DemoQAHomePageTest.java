@@ -1,4 +1,5 @@
 import Pages.HomePage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class DemoQAHomePageTest {
+public class DemoQAHomePageTest extends BaseMethod {
     static WebDriver driver;
     HomePage homePage;
 
@@ -52,7 +53,7 @@ public class DemoQAHomePageTest {
     void validateAllMenuPresent() throws IOException, InterruptedException {
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         for(String menuName : homePage.menuItems.keySet()){
-            DriverUtils.scrollToElementAndClick(driver, homePage.menuItems.get(menuName));
+            DriverUtils.scrollToElementAndClick(homePage.menuItems.get(menuName));
             Assert.assertEquals(driver.findElement(homePage.mainHeader).getText(), menuName);
             driver.navigate().back();
         }
@@ -60,6 +61,6 @@ public class DemoQAHomePageTest {
 
     @AfterClass
     void wrapUp(){
-        driver.quit();
+        DriverUtils.quitWebdriver();
     }
 }

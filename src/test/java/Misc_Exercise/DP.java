@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class DP {
-    static final String EXCEL_FILE_PATH = System.getProperty("user.dir")+ "/resources/test_data/Mock_Data1000.xls";
+    static final String EXCEL_FILE_PATH = System.getProperty("user.dir")+ "/resources/test_data//Mock_Data.xlsx";
 
     @DataProvider(name = "data-provider")
     public Object[][] dpMethod() throws IOException {

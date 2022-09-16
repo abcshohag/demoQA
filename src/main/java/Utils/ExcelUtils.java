@@ -1,9 +1,12 @@
 package Utils;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -45,6 +48,7 @@ public class ExcelUtils {
                         tabArray[ci][cj] = getCellData_XLSX(i, j);
                         cj++;
                     }
+
                     ci++;
                 }
             } else if (file.getAbsolutePath().endsWith(".xls")) {
@@ -216,5 +220,13 @@ public class ExcelUtils {
     public static int xlsColumnCount() {
         int rowNum = xlsWorkSheet.getRow(0).getLastCellNum();
         return rowNum;
+    }
+
+    public static Boolean isRowEmpty(Row r){
+        String s = "";
+        for(Cell c : r){
+            s += c.toString();
+        }
+        return s.trim().isEmpty();
     }
 }

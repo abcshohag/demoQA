@@ -18,7 +18,7 @@ public class Hamdan extends BaseMethod {
     void setup() {
         driver = DriverUtils.getWebDriver();
         driver.get("https://demoqa.com");
-        DriverUtils.setTimeout(driver, 5000);
+        DriverUtils.setTimeout(5000);
     }
 
     @Test(priority = 1)
@@ -30,11 +30,10 @@ public class Hamdan extends BaseMethod {
         driver.findElement(By.cssSelector("#app > div > div > div.home-body > div > div:nth-child(1)")).click();
     }
 
-
     @AfterClass
-    void quit() {
-        driver.quit();}
-
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
+    }
 }
 //
 //    @Test

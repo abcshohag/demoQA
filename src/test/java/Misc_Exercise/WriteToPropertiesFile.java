@@ -37,7 +37,7 @@ public class WriteToPropertiesFile {
 //        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".recaptcha-checkbox"))).click();
 
         Thread.sleep(3000);
-        DriverUtils.scrollToElementAndClick(driver, By.cssSelector("#register"));
+        DriverUtils.scrollToElementAndClick(By.cssSelector("#register"));
         System.out.println((driver.findElement(By.cssSelector("#userName")).getAttribute("class")));
 
 

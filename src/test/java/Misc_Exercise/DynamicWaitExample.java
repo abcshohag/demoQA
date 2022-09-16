@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,12 +13,12 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class DynamicWaitExample {
+public class DynamicWaitExample  extends BaseMethod {
     @Test
     void dynamicPageLoading(){
         WebDriver driver = DriverUtils.getWebDriver();
         driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
-        DriverUtils.setTimeout(driver, 15);
+        DriverUtils.setTimeout(15);
         driver.findElement(By.cssSelector("#start button")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -25,6 +26,10 @@ public class DynamicWaitExample {
 
         String result = driver.findElement(By.cssSelector("#finish h4")).getText();
         Assert.assertTrue(result.contains("Hello World!"));
-        driver.quit();
+    }
+
+    @AfterClass
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
 }

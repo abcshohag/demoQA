@@ -1,4 +1,5 @@
 import Pages.Widget_TooltipPage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
-public class TooltipTest {
+public class TooltipTest  extends BaseMethod {
     WebDriver driver;
     Widget_TooltipPage tooltipPage;
 
@@ -41,6 +42,6 @@ public class TooltipTest {
 
     @AfterClass
     void wrapUp(){
-        driver.quit();
+        DriverUtils.quitWebdriver();
     }
 }

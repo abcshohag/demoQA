@@ -1,4 +1,5 @@
 import Pages.ElementsPage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.io.IOException;
 
-public class CheckboxPage {
+public class CheckboxPage extends BaseMethod {
     static WebDriver driver;
     static ElementsPage elementsPage;
 
@@ -23,7 +24,7 @@ public class CheckboxPage {
         driver.findElement(elementsPage.checkbox_submenu).click();
     }
 
-    @Test
+    @Test (groups = "mostImportant")
     void testCheckboxPositive() throws InterruptedException {
         driver.findElement(By.cssSelector("#tree-node>ol>li>span>button")).click(); // expand home
         driver.findElement(By.cssSelector("#tree-node>ol>li>ol>li:nth-child(2)>span>button")).click(); //Expand Document
@@ -34,16 +35,13 @@ public class CheckboxPage {
         Assert.assertTrue( el.getText().contains("private") );
 
         //click general and assert the result again
-        DriverUtils.scrollToElementAndClick(driver, By.cssSelector("[for='tree-node-general']")); //click general file
+        DriverUtils.scrollToElementAndClick(By.cssSelector("[for='tree-node-general']")); //click general file
 
         Assert.assertTrue( el.getText().contains("private") && el.getText().contains("general") );
     }
 
-
-
     @AfterClass
     void wrapUp(){
-        driver.quit();
+        DriverUtils.quitWebdriver();
     }
-
 }

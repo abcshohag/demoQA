@@ -19,11 +19,11 @@ public class Element_TextBox extends ElementsPage{
 
 
 
-    public void populateFormAndClick(WebDriver driver, String name, String email, String currAdd, String perAdd){
-        driver.findElement(userName).sendKeys(name);
-        driver.findElement(userEmail).sendKeys(email);
-        driver.findElement(currentAddress).sendKeys(currAdd);
-        driver.findElement(permanantAddress).sendKeys(perAdd);
-        DriverUtils.scrollWaitAndClickUsingJs(driver, submitButton, 5000);
+    public void populateFormAndClick(String name, String email, String currAdd, String perAdd){
+        sendKeysToElement(userName, name);
+        sendKeysToElement(userEmail, email);
+        sendKeysToElement(currentAddress, currAdd);
+        sendKeysToElement(permanantAddress, perAdd);
+        DriverUtils.scrollWaitAndClickUsingJs(submitButton, 5000);
     }
 }

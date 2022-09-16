@@ -1,14 +1,9 @@
 package Utils;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
@@ -19,17 +14,13 @@ import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.Response;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 public class DriverUtils {
-    private DriverUtils(){}
     public static Properties prop;
 
     private static WebDriver driver;
@@ -44,16 +35,13 @@ public class DriverUtils {
     }
 
     //pass a value between 1 to 100 denoting percentage.
-    public static void zoomOutToPercentage(WebDriver driver, double percentage){
+    public static void zoomOutToPercentage(double percentage){
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("document.body.style.zoom = '" + percentage  + "'");
     }
 
-    public static void scrollToElement(WebDriver driver, WebElement el){
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
-    }
 
-    public static void scrollToElementAndClick(WebDriver driver, By selector){
+    public static void scrollToElementAndClick(By selector){
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(selector));
         driver.findElement(selector).click();
     }
@@ -83,18 +71,18 @@ public class DriverUtils {
     }
 
 
-    public static void setTimeout(WebDriver d, int ms){
+    public static void setTimeout(int ms){
         //This timeout is used to specify the amount of time the driver
         // should wait while searching for an element if it is not immediately present.
-        d.manage().timeouts().implicitlyWait(Duration.ofMillis(ms));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(ms));
 
         //This is used to set the amount of time the WebDriver must wait for an asynchronous
         // script to finish execution before throwing an error.
-        d.manage().timeouts().scriptTimeout(Duration.ofMillis(ms));
+        driver.manage().timeouts().scriptTimeout(Duration.ofMillis(ms));
 
         //This sets the time to wait for a page to load completely before throwing an error.
         // If the timeout is negative, page loads can be indefinite.
-        d.manage().timeouts().pageLoadTimeout(Duration.ofMillis(ms));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(ms));
     }
 
     public static Boolean isFileExist(String absoluteFilePath){
@@ -122,7 +110,7 @@ public class DriverUtils {
         property.store(new FileOutputStream("demoqa.properties"), null);
     }
 
-    public static void clickUsingJS(WebDriver driver, WebElement element){
+    public static void clickUsingJS(WebElement element){
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
@@ -133,6 +121,7 @@ public class DriverUtils {
         if( driver != null && !driver.toString().contains("(null)") )
             return driver;
         String browser = prop.getProperty("browser");
+        System.out.println("### Creating new " + browser + " web driver.");
         switch (browser.toLowerCase()){
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -173,19 +162,26 @@ public class DriverUtils {
         }
         return driver;
     }
-    public static void waitAndClick(WebDriver driver, By elementSelector, int ms){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(ms));
-        wait.until(ExpectedConditions.elementToBeClickable(elementSelector));
-        DriverUtils.scrollToElementAndClick (driver, elementSelector);
+
+    public static void quitWebdriver(){
+        if( driver != null && !driver.toString().contains("(null)") ) {
+            System.out.println("Browser open: closing now");
+            driver.quit();
+        }
     }
 
-    public static void scrollAndClick(WebDriver driver, String cssSelector){
+    public static void waitAndClick(By elementSelector, int ms){
+        new WebDriverWait(driver, Duration.ofSeconds(ms)).until(ExpectedConditions.elementToBeClickable(elementSelector));
+        DriverUtils.scrollToElementAndClick(elementSelector);
+    }
+
+    public static void scrollAndClick(String cssSelector){
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(cssSelector)));
         driver.findElement(By.cssSelector(cssSelector)).click();
     }
 
     //Use this method to click element that are almost impossible to click
-    public static void scrollWaitAndClickUsingJs(WebDriver driver, By elementSelector, int ms) {
+    public static void scrollWaitAndClickUsingJs(By elementSelector, int ms) {
         //1. Scroll using JS
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(elementSelector));
 
@@ -196,10 +192,10 @@ public class DriverUtils {
         String currentZoom = (String) ((JavascriptExecutor)driver).executeScript("return document.body.style.zoom;");
 
         //3. Zoom out to 50%
-        DriverUtils.zoomOutToPercentage(driver, .50);
+        DriverUtils.zoomOutToPercentage(.50);
 
         //4. click using JS
-        DriverUtils.clickUsingJS(driver, element);
+        DriverUtils.clickUsingJS(element);
         //5. Set old Zoom percentage
         if(currentZoom.length() > 0){
             ((JavascriptExecutor)driver).executeScript("document.body.style.zoom=" + currentZoom);

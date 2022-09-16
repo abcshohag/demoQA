@@ -1,5 +1,6 @@
 import Pages.Element_RadioButtonPage;
 import Pages.ElementsPage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -9,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class RadioButtonTest {
+public class RadioButtonTest  extends BaseMethod {
     WebDriver driver;
     ElementsPage elementsPage;
     Element_RadioButtonPage rb;
@@ -38,9 +39,9 @@ public class RadioButtonTest {
         Assert.assertFalse(successMessage.contains("No"));
         Thread.sleep(3000);
     }
-    
+
     @AfterClass
     void wrapUp(){
-        driver.quit();
+        DriverUtils.quitWebdriver();
     }
 }

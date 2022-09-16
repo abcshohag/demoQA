@@ -13,23 +13,14 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Protocol;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebElement;
 import org.testng.*;
-import org.testng.annotations.AfterMethod;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class ExtentTestNGIReporterListener implements IReporter {
+public class ExtentTestNGIReporterListener  implements ITestNGListener{
     public static final String OUTPUT_FOLDER = "./src/test/resources/Reports/";
     public static final String FILE_NAME = "Extent Report.html";
     public ExtentReports extent;

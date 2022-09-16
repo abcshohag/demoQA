@@ -1,16 +1,18 @@
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.List;
 
-public class FileDownloadTest_1 {
+public class FileDownloadTest_1  extends BaseMethod {
     WebDriver driver;
 
     @BeforeClass
@@ -32,6 +34,10 @@ public class FileDownloadTest_1 {
 
         Assert.assertTrue(downloadedFile.exists());
         downloadedFile.delete();
-        driver.quit();
+    }
+
+    @AfterClass
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
 }

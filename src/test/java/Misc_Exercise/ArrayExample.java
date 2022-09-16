@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
@@ -13,7 +14,7 @@ import java.io.File;
 import java.sql.Driver;
 import java.util.List;
 
-public class ArrayExample {
+public class ArrayExample extends BaseMethod {
     WebDriver driver;
 
     @BeforeClass
@@ -35,8 +36,7 @@ public class ArrayExample {
     }
 
     @AfterClass
-    void wrapup(){
-        driver.quit();
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
-
 }

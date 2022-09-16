@@ -28,6 +28,5 @@ public class FileUploadTest extends BasePage {
 
         Assert.assertTrue(driver.findElement(By.cssSelector("#uploaded-files")).getText().contains("image.png"));
         Thread.sleep(5000);
-        driver.quit();
     }
 }

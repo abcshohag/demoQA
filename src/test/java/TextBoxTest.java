@@ -11,29 +11,29 @@ import org.testng.annotations.Test;
 
 public class TextBoxTest extends BasePage {
     WebDriver driver;
+    Element_TextBox textBox;
+
 
     @BeforeClass
     void setup(){
-        driver = WebDriverManager.chromedriver().create();
+        driver = DriverUtils.getWebDriver();
+        textBox = new Element_TextBox();
+        driver.get(textBox.pageUrl);
+
     }
 
     @Test
     void testForm() throws Exception {
-        Element_TextBox textBox = new Element_TextBox();
         By submitButton = new By.ByCssSelector("#submit");
+        robotZoomOut();
 
-        driver.get(textBox.pageUrl);
-        robotZoomOut();
-        robotZoomOut();
-        robotZoomOut();
-        robotZoomOut();
         Faker f = new Faker();
         String name = f.name().name();
         String email = f.name().username() + "@gmail.com";
         String currAddress = f.address().fullAddress();
 
-        textBox.populateFormAndClick(driver, name, email, currAddress, currAddress);
-        DriverUtils.scrollWaitAndClickUsingJs(driver, submitButton, 5000);
+        textBox.populateFormAndClick(name, email, currAddress, currAddress);
+        DriverUtils.scrollWaitAndClickUsingJs(submitButton, 5000);
         Assert.assertTrue(driver.findElement(textBox.output).getText().contains(name));
     }
 

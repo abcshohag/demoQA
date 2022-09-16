@@ -1,3 +1,4 @@
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -10,7 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class SelectableGridPageTest {
+public class SelectableGridPageTest  extends BaseMethod {
     static WebDriver driver;
 
     @BeforeClass
@@ -19,8 +20,8 @@ public class SelectableGridPageTest {
         driver.get("https://demoqa.com/");
 
         //Scrolling down to Interaction and menu and clicking
-        DriverUtils.scrollAndClick(driver, ".top-card:nth-child(5) .card-body");
-        DriverUtils.scrollAndClick(driver, ".element-group:nth-child(5) #item-1");
+        DriverUtils.scrollAndClick(".top-card:nth-child(5) .card-body");
+        DriverUtils.scrollAndClick(".element-group:nth-child(5) #item-1");
         //clciking on the grid tab
         driver.findElement(By.cssSelector("#demo-tab-grid")).click();
     }
@@ -57,7 +58,6 @@ public class SelectableGridPageTest {
 
     @AfterClass
     void wrapUp(){
-        System.out.println("calling after class");
-        driver.quit();
+        DriverUtils.quitWebdriver();
     }
 }

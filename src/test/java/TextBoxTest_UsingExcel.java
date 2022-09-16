@@ -11,8 +11,7 @@ public class TextBoxTest_UsingExcel extends BaseMethod {
     Element_TextBox textBox;
     static final String EXCEL_FILE_PATH = System.getProperty("user.dir") + "/resources/test_data/TestDataForTextBox.xlsx";
 
-
-    @BeforeMethod
+    @BeforeClass
     void setup() throws Exception {
         driver = DriverUtils.getWebDriver();
         textBox = new Element_TextBox();
@@ -27,17 +26,21 @@ public class TextBoxTest_UsingExcel extends BaseMethod {
     }
 
     @Test(dataProvider = "loadFormData")
-    void testForm(String str1, String str2, String str3, String str4) throws Exception {
-
+    void testForm(String name, String str2, String str3, String str4, String gender) throws Exception {
         //populating form
-        driver.findElement(textBox.userName).sendKeys(str1);
+        driver.findElement(textBox.userName).sendKeys(name);
         driver.findElement(textBox.userEmail).sendKeys(str2);
 
         driver.findElement(textBox.currentAddress).sendKeys(str3);
         driver.findElement(textBox.permanantAddress).sendKeys(str4);
 
-        DriverUtils.scrollWaitAndClickUsingJs(driver, textBox.submitButton, 5000);
-        Assert.assertTrue( driver.findElement(textBox.output).getText().contains(str1));
+        DriverUtils.scrollWaitAndClickUsingJs(textBox.submitButton, 5000);
+        Assert.assertTrue( driver.findElement(textBox.output).getText().contains(name));
         driver.navigate().refresh();
+    }
+
+    @AfterClass
+    void wrapUp(){
+        DriverUtils.quitWebdriver();
     }
 }
