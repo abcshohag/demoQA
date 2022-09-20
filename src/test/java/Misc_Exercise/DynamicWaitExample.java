@@ -16,9 +16,9 @@ import java.time.Duration;
 public class DynamicWaitExample  extends BaseMethod {
     @Test
     void dynamicPageLoading(){
-        WebDriver driver = DriverUtils.getWebDriver();
+        WebDriver driver = getWebDriver();
         driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
-        DriverUtils.setTimeout(15);
+        setTimeout(15);
         driver.findElement(By.cssSelector("#start button")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -30,6 +30,6 @@ public class DynamicWaitExample  extends BaseMethod {
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

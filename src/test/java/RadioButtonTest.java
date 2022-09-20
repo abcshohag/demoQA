@@ -17,7 +17,7 @@ public class RadioButtonTest  extends BaseMethod {
 
     @BeforeClass
     void getReady(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         elementsPage = new ElementsPage();
         rb = new Element_RadioButtonPage();
         driver.get(ElementsPage.pageUrl);
@@ -29,7 +29,6 @@ public class RadioButtonTest  extends BaseMethod {
         driver.findElement(rb.yesRadio).click();
         String successMessage = driver.findElement(rb.successMessage).getText();
         Assert.assertTrue(successMessage.contains("Yes"));
-        Thread.sleep(3000);
     }
 
     @Test(priority = 2)
@@ -37,11 +36,10 @@ public class RadioButtonTest  extends BaseMethod {
         driver.findElement(rb.noRadio).click();
         String successMessage = driver.findElement(rb.successMessage).getText();
         Assert.assertFalse(successMessage.contains("No"));
-        Thread.sleep(3000);
     }
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

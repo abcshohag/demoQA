@@ -23,21 +23,23 @@ public class ReadPropertiesPracticE extends BaseMethod {
 //            System.out.println(address.split("Zip: " + ",")[2].split("\\s")[1]);
 //        }
 
-        String cardToFind = DriverUtils.initializeProperties().getProperty("CardToApply");
-        String cardId = new BoFa_CC_Page().cardsList.get(cardToFind);
-        WebDriver driver = DriverUtils.getWebDriver();
-        driver.get("https://www.bankofamerica.com/credit-cards/#filter");
-        Thread.sleep(3000);
+//        String cardToFind = DriverUtils.initializeProperties().getProperty("CardToApply");
+//        String cardId = new BoFa_CC_Page().cardsList.get(cardToFind);
+//        WebDriver driver = DriverUtils.getWebDriver();
+//        driver.get("https://www.bankofamerica.com/credit-cards/#filter");
+//        Thread.sleep(3000);
+//
+//        System.out.println("Looking for Card: " + cardToFind);
+//        System.out.println("Card Id: " + cardId);
+//        List<WebElement> cards = driver.findElements(By.cssSelector("div[class*='card-info visible'] a[id*='home_" + cardId + "' ]"));
+//        System.out.println("Final css selector: " + "div[class*='card-info visible'] a[id*='home_" + cardId + "' ]");
+//        System.out.println("No of card found: " + cards.size());
+//        System.out.println("Size of cards: " + cards.size());
+//        if(cards.size()==1){
+//            cards.get(0).click();
+//        }
 
-        System.out.println("Looking for Card: " + cardToFind);
-        System.out.println("Card Id: " + cardId);
-        List<WebElement> cards = driver.findElements(By.cssSelector("div[class*='card-info visible'] a[id*='home_" + cardId + "' ]"));
-        System.out.println("Final css selector: " + "div[class*='card-info visible'] a[id*='home_" + cardId + "' ]");
-        System.out.println("No of card found: " + cards.size());
-        System.out.println("Size of cards: " + cards.size());
-        if(cards.size()==1){
-            cards.get(0).click();
-        }
+        System.out.println(System.getProperty("user.dir"));
 
 
 //        for(WebElement el :  cards){

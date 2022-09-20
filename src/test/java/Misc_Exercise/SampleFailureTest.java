@@ -1,6 +1,7 @@
 package Misc_Exercise;
 
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.*;
 import org.testng.Assert;
@@ -13,12 +14,12 @@ import java.util.List;
 import java.util.Set;
 
 //This test will fail due to various reason on purpose.
-public class SampleFailureTest {
+public class SampleFailureTest extends BaseMethod {
     WebDriver driver;
 
     @BeforeClass
     void init(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
     }
 
 
@@ -27,7 +28,7 @@ public class SampleFailureTest {
         driver.quit();
         Assert.assertThrows(NoSuchSessionException.class,
                 () -> driver.get("www.google.com"));
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
 
     }
 
@@ -58,6 +59,6 @@ public class SampleFailureTest {
 
     @AfterClass
     void wrapup(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

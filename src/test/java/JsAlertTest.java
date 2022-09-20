@@ -1,3 +1,4 @@
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class JsAlertTest {
+public class JsAlertTest extends BaseMethod {
     WebDriver driver;
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.get("https://demoqa.com/alerts");
     }
 
@@ -23,8 +24,7 @@ public class JsAlertTest {
 
         //click first alert
         driver.findElement(By.cssSelector("#alertButton")).click();
-        Thread.sleep(3000);
-        driver.switchTo().alert().accept();
+        alertAccept();
 
         //click second alert
         driver.findElement(By.cssSelector("#timerAlertButton")).click();

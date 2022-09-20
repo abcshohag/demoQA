@@ -1,10 +1,15 @@
 package Pages;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Element_TextBox extends ElementsPage{
+public class Element_TextBox{
+    BaseMethod bm;
+    public Element_TextBox(BaseMethod bm){
+        this.bm = bm;
+    }
 
     public By userName = new By.ByCssSelector("#userName");
     public By userEmail = new By.ByCssSelector("#userEmail");
@@ -20,10 +25,10 @@ public class Element_TextBox extends ElementsPage{
 
 
     public void populateFormAndClick(String name, String email, String currAdd, String perAdd){
-        sendKeysToElement(userName, name);
-        sendKeysToElement(userEmail, email);
-        sendKeysToElement(currentAddress, currAdd);
-        sendKeysToElement(permanantAddress, perAdd);
-        DriverUtils.scrollWaitAndClickUsingJs(submitButton, 5000);
+        bm.sendKeysToElement(userName, name);
+        bm.sendKeysToElement(userEmail, email);
+        bm.sendKeysToElement(currentAddress, currAdd);
+        bm.sendKeysToElement(permanantAddress, perAdd);
+        bm.scrollWaitAndClickUsingJs(submitButton, 5000);
     }
 }

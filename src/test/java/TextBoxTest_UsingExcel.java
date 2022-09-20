@@ -13,8 +13,8 @@ public class TextBoxTest_UsingExcel extends BaseMethod {
 
     @BeforeClass
     void setup() throws Exception {
-        driver = DriverUtils.getWebDriver();
-        textBox = new Element_TextBox();
+        driver = getWebDriver();
+        textBox = new Element_TextBox(this);
         driver.get(textBox.pageUrl);
         driver.manage().window().maximize();
     }
@@ -34,13 +34,13 @@ public class TextBoxTest_UsingExcel extends BaseMethod {
         driver.findElement(textBox.currentAddress).sendKeys(str3);
         driver.findElement(textBox.permanantAddress).sendKeys(str4);
 
-        DriverUtils.scrollWaitAndClickUsingJs(textBox.submitButton, 5000);
+        scrollWaitAndClickUsingJs(textBox.submitButton, 5000);
         Assert.assertTrue( driver.findElement(textBox.output).getText().contains(name));
         driver.navigate().refresh();
     }
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

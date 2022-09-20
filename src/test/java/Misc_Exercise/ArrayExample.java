@@ -19,7 +19,7 @@ public class ArrayExample extends BaseMethod {
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.get("http://the-internet.herokuapp.com/download");
     }
 
@@ -37,6 +37,6 @@ public class ArrayExample extends BaseMethod {
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

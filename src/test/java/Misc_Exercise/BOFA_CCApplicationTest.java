@@ -31,11 +31,11 @@ public class BOFA_CCApplicationTest extends BaseMethod {
 
     @BeforeMethod
     void init() throws IOException {
-        driver = DriverUtils.getWebDriver();
-        driver.manage().window().maximize();
+        driver = getWebDriver();
+        driver.manage().window().fullscreen();
         bofaCCPage = new BoFa_CC_Page();
         applicationPage = new CC_ApplicationPage();
-        DriverUtils.setTimeout(60000);
+        setTimeout(60000);
     }
 
     @DataProvider(name = "loadFormData")
@@ -73,7 +73,7 @@ public class BOFA_CCApplicationTest extends BaseMethod {
         sendKeysToElement(applicationPage.phone, phone);
         javaScriptExecutorClick(applicationPage.mobilePhoneRadio);
         sendKeysToElement(applicationPage.emailSelector, email);
-        DriverUtils.scrollToElementAndClick(applicationPage.submitAndContinue);
+        scrollToElementAndClick(applicationPage.submitAndContinue);
 
         // Page #2
         javaScriptExecutorClick(applicationPage.yesUSCitizen);
@@ -104,6 +104,5 @@ public class BOFA_CCApplicationTest extends BaseMethod {
         Assert.assertTrue(reviewApplicationSectionText.contains(maskedEmail));
         Assert.assertTrue(reviewApplicationSectionText.contains(phone.substring(7)));
 //        Assert.assertEquals(actualCardName, bofaCCPage.cardsList.get(cardId));
-        Thread.sleep(2000);
      }
 }

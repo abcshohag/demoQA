@@ -1,8 +1,5 @@
 import Utils.BaseMethod;
-import Utils.DriverUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -11,7 +8,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class SelectableGridPageTest  extends BaseMethod {
+import java.util.List;
+
+public class SelectableGridPageTest_Dynamic extends BaseMethod {
     static WebDriver driver;
 
     @BeforeClass
@@ -28,17 +27,19 @@ public class SelectableGridPageTest  extends BaseMethod {
 
     @Test(threadPoolSize = 3, invocationCount = 6)
     void testGrid() throws InterruptedException {
-        testABox("#row1 li:nth-child(1)");
-        testABox("#row1 li:nth-child(2)");
-        testABox("#row1 li:nth-child(3)");
+        // This dynamic method should work even if there are more or less than 9 grid.
+        List<WebElement> boxes = driver.findElements(By.cssSelector(".grid-container li"));
+        for(int i = 0; i<boxes.size(); i++) {
+            testABox(boxes.get(i));
+        }
 
-        testABox("#row2 li:nth-child(1)");
-        testABox("#row2 li:nth-child(2)");
-        testABox("#row2 li:nth-child(3)");
-
-        testABox("#row3 li:nth-child(1)");
-        testABox("#row3 li:nth-child(2)");
-        testABox("#row3 li:nth-child(3)");
+        /*
+            A better way to write the above for loop:
+            for(WebElement el : boxes) {
+                testABox(el);
+            }
+            This way of writing for loop known as enhanced for loop
+        */
     }
 
     @Test
@@ -47,9 +48,8 @@ public class SelectableGridPageTest  extends BaseMethod {
         softAssert.assertTrue(false);
     }
 
-    void testABox(String selector) throws InterruptedException {
+    void testABox(WebElement box) throws InterruptedException {
         //box ONE
-        WebElement box =  driver.findElement(By.cssSelector(selector));
         box.click();
         Assert.assertTrue( box.getAttribute("class").contains("active") );
         box.click();

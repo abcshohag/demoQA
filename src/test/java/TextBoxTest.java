@@ -1,5 +1,6 @@
 import Pages.BasePage;
 import Pages.Element_TextBox;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -9,15 +10,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class TextBoxTest extends BasePage {
+public class TextBoxTest extends BaseMethod {
     WebDriver driver;
     Element_TextBox textBox;
 
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
-        textBox = new Element_TextBox();
+        driver = getWebDriver();
+        textBox = new Element_TextBox(this);
         driver.get(textBox.pageUrl);
 
     }
@@ -33,7 +34,7 @@ public class TextBoxTest extends BasePage {
         String currAddress = f.address().fullAddress();
 
         textBox.populateFormAndClick(name, email, currAddress, currAddress);
-        DriverUtils.scrollWaitAndClickUsingJs(submitButton, 5000);
+        scrollWaitAndClickUsingJs(submitButton, 5000);
         Assert.assertTrue(driver.findElement(textBox.output).getText().contains(name));
     }
 

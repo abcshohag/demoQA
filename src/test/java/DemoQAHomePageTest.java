@@ -12,12 +12,12 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class DemoQAHomePageTest extends BaseMethod {
-    static WebDriver driver;
+    WebDriver driver;
     HomePage homePage;
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.manage().window().maximize();
         homePage = new HomePage();
         driver.get(homePage.pageUrl);
@@ -53,7 +53,7 @@ public class DemoQAHomePageTest extends BaseMethod {
     void validateAllMenuPresent() throws IOException, InterruptedException {
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         for(String menuName : homePage.menuItems.keySet()){
-            DriverUtils.scrollToElementAndClick(homePage.menuItems.get(menuName));
+            scrollToElementAndClick(homePage.menuItems.get(menuName));
             Assert.assertEquals(driver.findElement(homePage.mainHeader).getText(), menuName);
             driver.navigate().back();
         }
@@ -61,6 +61,6 @@ public class DemoQAHomePageTest extends BaseMethod {
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

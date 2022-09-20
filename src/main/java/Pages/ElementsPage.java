@@ -3,7 +3,7 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ElementsPage extends BasePage{
+public class ElementsPage{
     public By textBox_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(1)");
     public By checkbox_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(2)");
     public By radioButton_submenu = new By.ByCssSelector(".element-group:first-child li:nth-child(3)");

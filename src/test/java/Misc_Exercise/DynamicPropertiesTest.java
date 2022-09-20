@@ -2,6 +2,7 @@ package Misc_Exercise;
 
 import Pages.BasePage;
 import Pages.ElementsPage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,17 +17,17 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.time.Duration;
 
-public class DynamicPropertiesTest extends BasePage {
+public class DynamicPropertiesTest extends BaseMethod {
     static WebDriver driver;
     static ElementsPage elementsPage;
 
     @BeforeClass
     void setup() throws IOException {
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.manage().window().maximize();
         elementsPage = new ElementsPage();
         driver.get(elementsPage.pageUrl);
-        DriverUtils.scrollToElementAndClick(elementsPage.dynamicProperties_submenu);
+        scrollToElementAndClick(elementsPage.dynamicProperties_submenu);
     }
 
     @Test

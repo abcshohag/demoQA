@@ -1,23 +1,25 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Test on DemoQA">
     <listeners>
-        <listener class-name="Listeners.ExtentTestNGIReporterListener" />
+        <listener class-name="com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter"></listener>
     </listeners>
-    <test name="Regression Suit #1">
+
+    <test name="Regression Suit #1" parallel="classes" thread-count="1">
         <classes>
-<!--            <class name="CheckboxPage"/>-->
-<!--            <class name="DemoQAHomePageTest"/>-->
-<!--            <class name="Misc_Exercise.BrokenLinksImagesTest"/>-->
-<!--            <class name="Misc_Exercise.DynamicWaitExample"/>-->
-<!--            <class name="Misc_Exercise.DynamicPropertiesTest"/>-->
-<!--            <class name="SelectableGridPageTest"/>-->
-<!--            <class name="FileDownloadTest_1"/>-->
-<!--            <class name="FileUploadTest"/>-->
+            <class name="CheckboxPage"/>
+            <class name="DemoQAHomePageTest"/>
+            <class name="Misc_Exercise.BrokenLinksImagesTest"/>
+            <class name="Misc_Exercise.DynamicWaitExample"/>
+            <class name="Misc_Exercise.DynamicPropertiesTest"/>
+            <class name="SelectableGridPageTest"/>
+            <class name="FileDownloadTest_1"/>
+            <class name="FileUploadTest"/>
             <class name="JsAlertTest"/>
-<!--            <class name="RadioButtonTest"/>-->
-<!--            <class name="ReadExcelForTestClass"/>-->
-<!--            <class name="TextBoxTest"/>-->
-<!--            <class name="TextBoxTest_UsingExcel"/>-->
+            <class name="RadioButtonTest"/>
+            <class name="ReadExcelForTestClass"/>
+            <class name="TextBoxTest"/>
+            <class name="TextBoxTest_UsingExcel"/>
+            <class name="Misc_Exercise.BOFA_CCApplicationTest"></class>
         </classes>
     </test>
 </suite>

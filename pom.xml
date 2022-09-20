@@ -49,10 +49,18 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
+
+<!--        The following two dependencies are for Extent Report-->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports-testng-adapter</artifactId>
+            <version>[1.0.2]</version>
+        </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
-            <version>5.0.9</version>
+            <version>[4.0.1]</version>
         </dependency>
+
     </dependencies>
 </project>

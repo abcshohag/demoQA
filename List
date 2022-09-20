@@ -1,0 +1,6 @@
+1. Add dependency
+2. Properties under resource (DONE)
+3. Add the following to the testng.xml:
+    <listeners>
+        <listener class-name="com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter"></listener>
+    </listeners>

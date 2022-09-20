@@ -20,15 +20,13 @@ public class TooltipTest  extends BaseMethod {
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         tooltipPage = new Widget_TooltipPage();
         driver.get(tooltipPage.pageUrl);
     }
 
     @Test
     void testTooltip() throws InterruptedException {
-        Thread.sleep(3000);
-
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(tooltipPage.hoverButtonSelector));
         actions.build().perform();
@@ -37,11 +35,10 @@ public class TooltipTest  extends BaseMethod {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(tooltipPage.toolTip));
 
         Assert.assertTrue(element.getText().contains("You hovered over the Button"));
-        Thread.sleep(10000);
     }
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

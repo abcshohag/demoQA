@@ -17,7 +17,7 @@ public class FileDownloadTest_1  extends BaseMethod {
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.get("http://the-internet.herokuapp.com/download");
     }
 
@@ -28,7 +28,7 @@ public class FileDownloadTest_1  extends BaseMethod {
         elements.get(randNum).click();
         Thread.sleep(5000);
         String fileName = elements.get(randNum).getText();
-        String downloadedFilePath = DriverUtils.initializeProperties().getProperty("downloadFolder") + fileName;
+        String downloadedFilePath = initializeProperties().getProperty("downloadFolder") + fileName;
         File downloadedFile = new File(downloadedFilePath);
         System.out.println(downloadedFile.getAbsolutePath());
 
@@ -38,6 +38,6 @@ public class FileDownloadTest_1  extends BaseMethod {
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

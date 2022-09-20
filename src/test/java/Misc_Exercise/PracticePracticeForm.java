@@ -26,11 +26,11 @@ public class PracticePracticeForm  extends BaseMethod {
 
     @BeforeClass
     void getReady(){
-        driver = DriverUtils.getWebDriver();
-        DriverUtils.setTimeout(10000);
+        driver = getWebDriver();
+        setTimeout(10000);
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/automation-practice-form");
-        DriverUtils.zoomOutToPercentage(.50);
+        zoomOutToPercentage(.50);
     }
 
 
@@ -44,32 +44,26 @@ public class PracticePracticeForm  extends BaseMethod {
         driver.findElement(By.cssSelector("#firstName")).sendKeys(faker.name().firstName());
         int randomBetween1to3 = faker.random().nextInt(1,3);
         WebElement randomGender = driver.findElement(By.cssSelector("input#gender-radio-" + randomBetween1to3 ));
-        DriverUtils.clickUsingJS(randomGender);
+        clickUsingJS(randomGender);
         driver.findElement(By.cssSelector("#userNumber")).sendKeys(faker.phoneNumber().cellPhone().replaceAll("[^0-9]", ""));
         selectDob();
 
         driver.findElement(By.cssSelector("#subjectsInput")).sendKeys("Math" + Keys.TAB);
         WebElement randomHobby = driver.findElement(By.cssSelector("input#hobbies-checkbox-" + randomBetween1to3));
-        DriverUtils.clickUsingJS(randomHobby);
+        clickUsingJS(randomHobby);
         driver.findElement(By.cssSelector("#uploadPicture")).sendKeys(System.getProperty("user.dir") +"/resources/test_data/image.png");
         driver.findElement(By.cssSelector("#currentAddress")).sendKeys(faker.address().fullAddress());
         driver.findElement(By.cssSelector("#react-select-3-input")).sendKeys("NC" + Keys.ENTER);
         driver.findElement(By.cssSelector("#react-select-4-input")).sendKeys("Noi" + Keys.ENTER);
-        DriverUtils.scrollWaitAndClickUsingJs(By.cssSelector("button[type='submit']"), 5000);
+        scrollWaitAndClickUsingJs(By.cssSelector("button[type='submit']"), 5000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated (By.cssSelector(".modal-title")));
         String outputMessage = driver.findElement(By.cssSelector(".modal-title")).getText();
         Assert.assertEquals(outputMessage, "Thanks for submitting the form");
-        Thread.sleep(10000);
     }
 
     private void selectDob() {
         Faker faker = new Faker(new Locale("us-US"));
-
-//        DriverUtils.scrollWaitAndClickUsingJs(driver, By.cssSelector("#dateOfBirthInput"), 5000);
-
-
-
         //year select
         Select year = new Select(driver.findElement(By.cssSelector(".react-datepicker__year-select")));
         year.selectByValue( String.valueOf(faker.random().nextInt(1920, 2020)) );
@@ -85,12 +79,11 @@ public class PracticePracticeForm  extends BaseMethod {
         }else{
             day = String.valueOf(d);
         }
-        DriverUtils.scrollWaitAndClickUsingJs(By.cssSelector(".react-datepicker__day--0" + day ), 5000);
+        scrollWaitAndClickUsingJs(By.cssSelector(".react-datepicker__day--0" + day ), 5000);
     }
-
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

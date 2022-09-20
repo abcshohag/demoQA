@@ -15,7 +15,7 @@ import java.util.List;
 public class ListExample  extends BaseMethod {
     @Test
     void testMenu() throws InterruptedException {
-        WebDriver driver = DriverUtils.getWebDriver();
+        WebDriver driver = getWebDriver();
         driver.get("https://demoqa.com/");
         List<WebElement> el = driver.findElements(By.cssSelector(".mt-4"));
         Faker f = new Faker();
@@ -35,6 +35,6 @@ public class ListExample  extends BaseMethod {
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }

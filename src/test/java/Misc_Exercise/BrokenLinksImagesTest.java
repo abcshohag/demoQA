@@ -2,6 +2,7 @@ package Misc_Exercise;
 
 import Pages.ElementsPage;
 import Pages.HomePage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,17 +12,17 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class BrokenLinksImagesTest {
+public class BrokenLinksImagesTest extends BaseMethod {
     static WebDriver driver;
     ElementsPage elementsPage;
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.manage().window().maximize();
         elementsPage = new ElementsPage();
         driver.get(elementsPage.pageUrl);
-        DriverUtils.scrollToElementAndClick(elementsPage.brokenLinksImages_submenu);
+        scrollToElementAndClick(elementsPage.brokenLinksImages_submenu);
     }
 
     @Test

@@ -1,4 +1,5 @@
 import Pages.BasePage;
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class FileUploadTest extends BasePage {
+public class FileUploadTest extends BaseMethod {
     WebDriver driver;
 
     @BeforeClass
     void setup(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.get("http://the-internet.herokuapp.com/upload");
     }
 
@@ -21,12 +22,9 @@ public class FileUploadTest extends BasePage {
         WebElement fileUpload = driver.findElement(By.cssSelector("#file-upload"));
         String absolutePath = System.getProperty("user.dir") + "/resources/test_data/image.png";
         fileUpload.sendKeys(absolutePath);
-        Thread.sleep(2000);
+        Thread.sleep(500);
 
         driver.findElement(By.cssSelector("#file-submit")).click();
-        Thread.sleep(2000);
-
         Assert.assertTrue(driver.findElement(By.cssSelector("#uploaded-files")).getText().contains("image.png"));
-        Thread.sleep(5000);
     }
 }

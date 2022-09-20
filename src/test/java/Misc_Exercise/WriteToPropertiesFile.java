@@ -1,5 +1,6 @@
 package Misc_Exercise;
 
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -16,6 +17,7 @@ import java.util.Properties;
 
 public class WriteToPropertiesFile {
     public static void main(String[] args) throws InterruptedException, IOException {
+        BaseMethod baseMethod = new BaseMethod();
         WebDriver driver = WebDriverManager.chromedriver().create();
         Faker faker = new Faker();
         driver.get("https://demoqa.com/register");
@@ -37,7 +39,7 @@ public class WriteToPropertiesFile {
 //        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".recaptcha-checkbox"))).click();
 
         Thread.sleep(3000);
-        DriverUtils.scrollToElementAndClick(By.cssSelector("#register"));
+        baseMethod.scrollToElementAndClick(By.cssSelector("#register"));
         System.out.println((driver.findElement(By.cssSelector("#userName")).getAttribute("class")));
 
 

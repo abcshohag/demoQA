@@ -1,3 +1,4 @@
+import Utils.BaseMethod;
 import Utils.DriverUtils;
 import Utils.ExcelUtils;
 import org.openqa.selenium.By;
@@ -9,13 +10,13 @@ import org.testng.annotations.Test;
 import java.sql.Driver;
 
 
-public class ReadExcelForTestClass {
+public class ReadExcelForTestClass extends BaseMethod {
     static final String EXCEL_FILE_PATH = System.getProperty("user.dir") + "/resources/test_data/Mock_Data.xlsx";
     WebDriver driver;
 
     @BeforeClass
     void init(){
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
     }
 
     @DataProvider(name = "loadFormData")

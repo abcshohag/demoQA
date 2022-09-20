@@ -17,7 +17,7 @@ public class CheckboxPage extends BaseMethod {
 
     @BeforeClass
     void setup() throws IOException {
-        driver = DriverUtils.getWebDriver();
+        driver = getWebDriver();
         driver.manage().window().maximize();
         elementsPage = new ElementsPage();
         driver.get(elementsPage.pageUrl);
@@ -35,13 +35,13 @@ public class CheckboxPage extends BaseMethod {
         Assert.assertTrue( el.getText().contains("private") );
 
         //click general and assert the result again
-        DriverUtils.scrollToElementAndClick(By.cssSelector("[for='tree-node-general']")); //click general file
+        scrollToElementAndClick(By.cssSelector("[for='tree-node-general']")); //click general file
 
         Assert.assertTrue( el.getText().contains("private") && el.getText().contains("general") );
     }
 
     @AfterClass
     void wrapUp(){
-        DriverUtils.quitWebdriver();
+        quitWebdriver();
     }
 }
