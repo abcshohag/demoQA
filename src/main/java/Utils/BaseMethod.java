@@ -329,6 +329,7 @@ public class BaseMethod extends DriverUtils {
 
     /* To Perform Select Option by Visible Text */
     public void selectByVisibleText(By selector, String value) {
+        wait.until(ExpectedConditions.elementToBeClickable(selector));
         se = new Select(driver.findElement(selector));
         se.selectByVisibleText(value);
     }
@@ -364,6 +365,10 @@ public class BaseMethod extends DriverUtils {
 
     public void click(By selector) {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(selector))).click();
+    }
+
+    public void clickUsingAction(By selector){
+        ac.moveToElement(driver.findElement(selector)).click().build().perform();
     }
 
 
@@ -555,8 +560,7 @@ public class BaseMethod extends DriverUtils {
 
 
     public void scrollToElementAndClick(By selector) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(selector));
-        driver.findElement(selector).click();
+        ac.moveToElement(driver.findElement(selector)).click().build().perform();
     }
 
     /*

@@ -4,22 +4,22 @@
         <listener class-name="com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter"></listener>
     </listeners>
 
-    <test name="Regression Suit #1" parallel="classes" thread-count="1">
+    <test name="Regression Suit #1">
         <classes>
-            <class name="CheckboxPage"/>
-            <class name="DemoQAHomePageTest"/>
-            <class name="Misc_Exercise.BrokenLinksImagesTest"/>
+            <class name="DemoQA.CheckboxPage"/>
+            <class name="DemoQA.DemoQAHomePageTest"/>
+            <class name="DemoQA.BrokenLinksImagesTest"/>
             <class name="Misc_Exercise.DynamicWaitExample"/>
-            <class name="Misc_Exercise.DynamicPropertiesTest"/>
-            <class name="SelectableGridPageTest"/>
-            <class name="FileDownloadTest_1"/>
-            <class name="FileUploadTest"/>
-            <class name="JsAlertTest"/>
-            <class name="RadioButtonTest"/>
-            <class name="ReadExcelForTestClass"/>
-            <class name="TextBoxTest"/>
-            <class name="TextBoxTest_UsingExcel"/>
-            <class name="Misc_Exercise.BOFA_CCApplicationTest"></class>
+            <class name="DemoQA.DynamicPropertiesTest"/>
+            <class name="DemoQA.SelectableGridPageTest"/>
+            <class name="DemoQA.FileDownloadTest_1"/>
+            <class name="DemoQA.FileUploadTest"/>
+            <class name="DemoQA.JsAlertTest"/>
+            <class name="DemoQA.RadioButtonTest"/>
+            <class name="Misc_Exercise.ReadExcelForTestClass"/>
+            <class name="DemoQA.TextBoxTest"/>
+            <class name="DemoQA.TextBoxTest_UsingExcel"/>
+            <class name="BoFA.BOFA_CCApplicationTest"></class>
         </classes>
     </test>
 </suite>

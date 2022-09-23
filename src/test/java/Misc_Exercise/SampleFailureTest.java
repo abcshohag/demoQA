@@ -32,8 +32,6 @@ public class SampleFailureTest extends BaseMethod {
 
     }
 
-
-
     @Test(priority = 2)
     void invalidSelector(){
         driver.get("http://www.google.com");

@@ -1,24 +1,20 @@
-package Misc_Exercise;
+package DemoQA;
+
 import Utils.BaseMethod;
-import Utils.DriverUtils;
 import com.github.javafaker.Faker;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.text.SimpleDateFormat;
+
 import java.time.Duration;
-import java.util.List;
 import java.util.Locale;
 
 public class PracticePracticeForm  extends BaseMethod {

@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.sql.Driver;
 import java.util.List;
+import java.util.Random;
 
 public class ArrayExample extends BaseMethod {
     WebDriver driver;
@@ -27,7 +28,7 @@ public class ArrayExample extends BaseMethod {
     void test1(){
         Faker f = new Faker();
         List<WebElement> downloadLinks = driver.findElements(By.cssSelector(".example a"));
-
+        Random r = new Random();
         if(downloadLinks.size() > 0 ){
             WebElement singleDownloadLink = downloadLinks.get(f.random().nextInt(0, downloadLinks.size()-1));
             singleDownloadLink.click();

@@ -54,4 +54,5 @@ public class CC_ApplicationPage {
 
     public By finalPageCardName = new By.ByCssSelector("span.show-for-medium-up");
 
+    public By loadingSpinner = new By.ByCssSelector(".body-row--loading");
 }

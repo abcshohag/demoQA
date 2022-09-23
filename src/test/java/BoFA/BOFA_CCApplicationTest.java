@@ -1,4 +1,4 @@
-package Misc_Exercise;
+package BoFA;
 
 import Pages.BoFA.BoFa_CC_Page;
 import Pages.BoFA.CC_ApplicationPage;
@@ -10,6 +10,7 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -32,11 +33,18 @@ public class BOFA_CCApplicationTest extends BaseMethod {
     @BeforeMethod
     void init() throws IOException {
         driver = getWebDriver();
-        driver.manage().window().fullscreen();
+        //driver.manage().window().fullscreen();
         bofaCCPage = new BoFa_CC_Page();
         applicationPage = new CC_ApplicationPage();
-        setTimeout(60000);
+        setTimeout(15000);
     }
+
+    /*
+        1. The following test method applies for the credit name that is mentioned in the Properties file.
+        2. If no credit card is mentioned there, it will randomly select Credit Cards and applies for them.
+        3. List of supported credit card can be found under BoFa_CC_Page class.
+        4. Credit Card name has to match exactly with any one of the option from BoFa_CC_Page's cardsList MAP.
+     */
 
     @DataProvider(name = "loadFormData")
     public static Object[][] dataLoad() throws Exception {
@@ -50,17 +58,15 @@ public class BOFA_CCApplicationTest extends BaseMethod {
     void testForm(Double id, String firstName, String lastName, String gender, String dob, String ssn, String phone, String email) throws InterruptedException {
         System.out.println(firstName + " - " + lastName + " - " + gender + " - " + dob  + " - " + ssn + " - " + phone + " - " + email);
         Faker f = new Faker(new Locale("en-us"));
-        Random r = new Random();
-
         driver.get(bofaCCPage.pageUrl);
 
-        List<String> keysAsArray = new ArrayList<String>(bofaCCPage.cardsList.keySet());
-        String cardId = bofaCCPage.cardsList.get(keysAsArray.get(r.nextInt(keysAsArray.size())));
-        System.out.println("Applying to card: " + bofaCCPage.cardsList.get(cardId));
+        String cardId = getCardId();
         WebElement randomCardApply = driver.findElement(By.cssSelector("div[class*='card-info visible'] a[id*='home_" + cardId + "' ]"));
 
         Address address = f.address();
         javaScriptExecutorClick(randomCardApply);
+
+        Boolean multiPageApplication = driver.findElements(applicationPage.termAndConditionCheck).isEmpty();
 
         //Start of Page #1
         sendKeysToElement(applicationPage.firstName, firstName);
@@ -73,7 +79,10 @@ public class BOFA_CCApplicationTest extends BaseMethod {
         sendKeysToElement(applicationPage.phone, phone);
         javaScriptExecutorClick(applicationPage.mobilePhoneRadio);
         sendKeysToElement(applicationPage.emailSelector, email);
-        scrollToElementAndClick(applicationPage.submitAndContinue);
+
+        if(multiPageApplication){
+            scrollToElementAndClick(applicationPage.submitAndContinue);
+        }
 
         // Page #2
         javaScriptExecutorClick(applicationPage.yesUSCitizen);
@@ -81,15 +90,23 @@ public class BOFA_CCApplicationTest extends BaseMethod {
         javaScriptExecutorClick(applicationPage.dualCitizenshipNo);
         selectByVisibleText(applicationPage.countrySelect, "United States");
         sendKeysToElement(applicationPage.dobInput, dob);
-        javaScriptExecutorClick(applicationPage.submitAndContinue);
+
+        if(multiPageApplication){
+            scrollToElementAndClick(applicationPage.submitAndContinue);
+        }
 
         // Page #3
-        selectByVisibleText(applicationPage.employmentStatus, "Employed");
+        if(driver.findElement(applicationPage.employmentStatus).isEnabled()){
+            selectByVisibleText(applicationPage.employmentStatus, "Employed");
+        }
         selectByVisibleText(applicationPage.occupationSelect, "Engineer");
         sendKeysToElement(applicationPage.annualIncome, "120000");
         selectByVisibleText(applicationPage.incomeSource, "Employment");
         sendKeysToElement(applicationPage.monthlyHousingCost, "1400");
-        click(applicationPage.submitAndContinue);
+
+        if(multiPageApplication) {
+            scrollToElementAndClick(applicationPage.submitAndContinue);
+        }
 
         //Page #4
         javaScriptExecutorClick(applicationPage.termAndConditionCheck);
@@ -97,12 +114,35 @@ public class BOFA_CCApplicationTest extends BaseMethod {
 
         //Review Application Page and Assertion
         String reviewApplicationSectionText = driver.findElement(applicationPage.reviewContainer).getText();
-//        String actualCardName = driver.findElement(applicationPage.finalPageCardName).getText().replaceAll("®", "");
         Assert.assertTrue(reviewApplicationSectionText.contains(firstName));
         Assert.assertTrue(reviewApplicationSectionText.contains(lastName));
         String maskedEmail = email.charAt(0) + "***" + email.substring(email.indexOf("@") - 1);
         Assert.assertTrue(reviewApplicationSectionText.contains(maskedEmail));
         Assert.assertTrue(reviewApplicationSectionText.contains(phone.substring(7)));
-//        Assert.assertEquals(actualCardName, bofaCCPage.cardsList.get(cardId));
      }
+
+     private String getCardId(){
+         String cardId;
+         String cardNameFromProperties = initializeProperties().getProperty("CardToApply");
+         List<String> cardNames = new ArrayList<String>(bofaCCPage.cardsList.keySet());
+
+         // 1. First check the properties file to see if a card name mentioned in there
+         // 2. if the following occurs, get a random card and apply
+         //     a. Card name is null or missing from properties
+         //     b. Card name mentioned is not one of the card name listed under page object.
+
+         if(cardNameFromProperties == null || cardNameFromProperties.isEmpty() || !bofaCCPage.cardsList.containsKey(cardNameFromProperties.trim())){
+             System.out.println("List of all Cards: " + cardNames);
+             int randomNumber = new Random().nextInt(cardNames.size());
+             cardId = bofaCCPage.cardsList.get(cardNames.get(randomNumber));
+             System.out.println("A random card Id: " + cardId);
+             System.out.println("Applying to card: " + cardNames.get(randomNumber));
+         }else{
+             cardId = bofaCCPage.cardsList.get(cardNameFromProperties.trim());
+         }
+         return cardId;
+     }
+
+
+
 }

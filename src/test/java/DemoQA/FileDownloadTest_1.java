@@ -1,3 +1,5 @@
+package DemoQA;
+
 import Utils.BaseMethod;
 import Utils.DriverUtils;
 import com.github.javafaker.Faker;

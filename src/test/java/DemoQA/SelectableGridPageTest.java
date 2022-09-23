@@ -1,3 +1,6 @@
+package DemoQA;
+
+import Pages.ElementsPage;
 import Utils.BaseMethod;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.List;
-
-public class SelectableGridPageTest_Dynamic extends BaseMethod {
+public class SelectableGridPageTest  extends BaseMethod {
     static WebDriver driver;
 
     @BeforeClass
@@ -27,19 +28,17 @@ public class SelectableGridPageTest_Dynamic extends BaseMethod {
 
     @Test(threadPoolSize = 3, invocationCount = 6)
     void testGrid() throws InterruptedException {
-        // This dynamic method should work even if there are more or less than 9 grid.
-        List<WebElement> boxes = driver.findElements(By.cssSelector(".grid-container li"));
-        for(int i = 0; i<boxes.size(); i++) {
-            testABox(boxes.get(i));
-        }
+        testABox("#row1 li:nth-child(1)");
+        testABox("#row1 li:nth-child(2)");
+        testABox("#row1 li:nth-child(3)");
 
-        /*
-            A better way to write the above for loop:
-            for(WebElement el : boxes) {
-                testABox(el);
-            }
-            This way of writing for loop known as enhanced for loop
-        */
+        testABox("#row2 li:nth-child(1)");
+        testABox("#row2 li:nth-child(2)");
+        testABox("#row2 li:nth-child(3)");
+
+        testABox("#row3 li:nth-child(1)");
+        testABox("#row3 li:nth-child(2)");
+        testABox("#row3 li:nth-child(3)");
     }
 
     @Test
@@ -48,8 +47,9 @@ public class SelectableGridPageTest_Dynamic extends BaseMethod {
         softAssert.assertTrue(false);
     }
 
-    void testABox(WebElement box) throws InterruptedException {
+    void testABox(String selector) throws InterruptedException {
         //box ONE
+        WebElement box =  driver.findElement(By.cssSelector(selector));
         box.click();
         Assert.assertTrue( box.getAttribute("class").contains("active") );
         box.click();

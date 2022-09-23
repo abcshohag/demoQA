@@ -1,3 +1,5 @@
+package DemoQA;
+
 import Pages.BasePage;
 import Utils.BaseMethod;
 import Utils.DriverUtils;

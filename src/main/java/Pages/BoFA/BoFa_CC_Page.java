@@ -8,17 +8,17 @@ public class BoFa_CC_Page {
     public String pageUrl = "https://www.bankofamerica.com/credit-cards/#filter";
     public By applyButton1 = new By.ByXPath("//a[contains(@href, '4061200')] [contains(text(),'Apply Now')] [not(contains(@class,'small'))]");
 
-    public Map<String, String> cardsList = Map.ofEntries(
+    public final Map<String, String> cardsList = Map.ofEntries(
             entry("Bank of America Customized Cash Rewards", "4060812"),
             entry("Bank of America Unlimited Cash Rewards", "4060592"),
             entry("BankAmericard", "4060759"),
             entry("Bank of America Travel Rewards", "4061182"),
             entry("Bank of America Premium Rewards", "4060800"),
             entry("Bank of America Premium Rewards Elite", "4061200"),
-            entry("Bank of America Customized Cash Rewards for Students", "4060817"),
-            entry("Bank of America Unlimited Cash Rewards for Students", "4060606"),
-            entry("BankAmericard for Students", "4060769"),
-            entry("Bank of America Travel Rewards for Students", "4061189"),
+//            entry("Bank of America Customized Cash Rewards for Students", "4060817"),
+//            entry("Bank of America Unlimited Cash Rewards for Students", "4060606"),
+//            entry("BankAmericard for Students", "4060769"),
+//            entry("Bank of America Travel Rewards for Students", "4061189"),
 //            entry("Bank of America Customized Cash Rewards Secured", "4060576"),
 //            entry("Bank of America Unlimited Cash Rewards Secured", "4060603"),
 //            entry("BankAmericard Secured", "4060781"),
